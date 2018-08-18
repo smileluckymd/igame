@@ -1,18 +1,16 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
-import { jsonrpc } from '../utils/odooUtils';
+import { odooLogin } from '../utils/odooUtils';
 
-//change by 2018.08.16  (zhaojian)
+// change by 2018.08.16  (zhaojian)
 export async function fakeAccountLogin(params) {
-  const params1 = {
+  const newParams = {
     type: params.type,
-    db: 'TT',
     login: params.userName,
     password: params.password,
   };
-  return jsonrpc('/json/user/login', params1);
+  return odooLogin(newParams);
 }
-/***********************/
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -72,14 +70,6 @@ export async function queryAdvancedProfile() {
 export async function queryFakeList(params) {
   return request(`/api/fake_list?${stringify(params)}`);
 }
-
-// export async function fakeAccountLogin(params) {
-//   console.log(params)
-//   return request('/api/login/account', {
-//     method: 'POST',
-//     body: params,
-//   });
-// }
 
 export async function fakeRegister(params) {
   return request('/api/register', {

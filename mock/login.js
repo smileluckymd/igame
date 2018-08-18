@@ -1,37 +1,39 @@
 export function odooJsonUserLogin(req, res) {
-    console.log(req.body)
-    const { params: { password, login, type } } = req.body;
-    if (password === '888888' && login === 'admin') {
-        res.send({
-            jsonrpc: 2.0, id: 1, method: 'call',
-            result: {
-                sid: 'qeqeqw',
-                name: 'ss',
-                uid: 1,
-                status: 'ok',
-                type,
-                currentAuthority: 'admin',
-            }
-        });
-        return ;
-    }
-
-
-    if (password === '123456' && userName === 'user') {
-        res.send({
-            status: 'ok',
-            type,
-            currentAuthority: 'user',
-        });
-        return;
-    }
+  const {
+    params: { password, login, type },
+  } = req.body;
+  if (password === '888888' && login === 'admin') {
     res.send({
-        status: 'error',
+      jsonrpc: 2.0,
+      id: 1,
+      method: 'call',
+      result: {
+        sid: 'qeqeqw',
+        name: 'ss',
+        uid: 1,
+        status: 'ok',
         type,
-        currentAuthority: 'guest',
+        currentAuthority: 'admin',
+      },
     });
+    return;
+  }
+
+  if (password === '123456' && login === 'user') {
+    res.send({
+      status: 'ok',
+      type,
+      currentAuthority: 'user',
+    });
+    return;
+  }
+  res.send({
+    status: 'error',
+    type,
+    currentAuthority: 'guest',
+  });
 }
 
 export default {
-    odooJsonUserLogin
+  odooJsonUserLogin,
 };

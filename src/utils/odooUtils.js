@@ -1,4 +1,5 @@
 import request from './request';
+
 export function jsonrpc(url, body) {
   const params = {
     jsonrpc: 2.0,
@@ -12,6 +13,14 @@ export function jsonrpc(url, body) {
   });
 }
 
+export async function odooLogin(params) {
+  const newParams = {
+    ...params,
+    db: 'TT',
+  };
+  return jsonrpc('/json/user/login', newParams);
+}
+
 export function toArray(a, b, c) {
   return [a, b, c];
 }
@@ -21,12 +30,22 @@ export function odooResponse(response) {
   return response.result;
 }
 
-export function odooCall(model, method, args, kwargs = {}) {
-  const params1 = {
-    model: model,
-    method: method,
-    args: args,
-    kwargs: kwargs,
+export function odooCall(params) {
+  // const {model, method, args=[], kwargs={}, mock=""} = params;
+  const { model } = params;
+  const { method } = params;
+  const args = params.args || [];
+  let kwargs = params.kwargs || { context: {} };
+  const mock = params.mock || '';
+  let { context } = kwargs;
+  context = { ...context, mock_react_api: mock };
+  kwargs = { ...kwargs, context };
+  const newParams = {
+    model,
+    method,
+    args,
+    kwargs,
   };
-  return jsonrpc('/json/api?session_id=' + JSON.parse(localStorage.userMSG).sid, params1);
+
+  return jsonrpc(`/json/api?session_id=${JSON.parse(localStorage.userMSG).sid}`, newParams);
 }

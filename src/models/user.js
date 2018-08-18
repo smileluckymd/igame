@@ -11,9 +11,8 @@ export default {
 
   effects: {
     *fetch(_, { call, put }) {
-      const response = odooResponse(yield call(queryUsers));
-      // const response = yield call(queryUsers);
-      console.log(response, 'fetch')
+      // const response = odooResponse(yield call(queryUsers));
+      const response = yield call(queryUsers);
       yield put({
         type: 'save',
         payload: response,
@@ -26,8 +25,8 @@ export default {
         name: response[0].name,
         userid: '0002323',
         notifyCount: '5',
-        avatar: ''
-      }
+        avatar: '',
+      };
       yield put({
         type: 'saveCurrentUser',
         payload: res,

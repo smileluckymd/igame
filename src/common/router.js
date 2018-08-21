@@ -158,6 +158,15 @@ export const getRouterData = app => {
         import('../routes/Exception/triggerException')
       ),
     },
+    '/game/nationwidegame': {
+      component: dynamicWrapper(app, ['game'], () => import('../routes/Game/NationwideGame')),
+    },
+    '/game/clubgame': {
+      component: dynamicWrapper(app, ['game'], () => import('../routes/Game/ClubGame')),
+    },
+    '/game/localgame': {
+      component: dynamicWrapper(app, ['game'], () => import('../routes/Game/LocalGame')),
+    },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },

@@ -2,6 +2,25 @@ import { isUrl } from '../utils/utils';
 
 const menuData = [
   {
+    name: '赛事区',
+    icon: 'schedule',
+    path: 'game',
+    children: [
+      {
+        name: '全国赛事',
+        path: 'nationwidegame',
+      },
+      {
+        name: '俱乐部赛事',
+        path: 'clubgame',
+      },
+      {
+        name: '地方赛事',
+        path: 'localgame',
+      },
+    ],
+  },
+  {
     name: 'dashboard',
     icon: 'dashboard',
     path: 'dashboard',

@@ -74,6 +74,7 @@ const proxy = {
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /json/user/login': odooJsonUserLogin,
   'POST /json/api': odooJsonApi,
+  // 'PSOT /json/game': odooJsonApi
   // 'POST /json/user/login': (req, res) => {
   //   const { password, userName, type } = req.body;
   //   if (password === '888888' && userName === 'admin') {
@@ -139,6 +140,5 @@ const proxy = {
     });
   },
 };
-
 
 export default (noProxy ? {} : delay(proxy, 1000));
